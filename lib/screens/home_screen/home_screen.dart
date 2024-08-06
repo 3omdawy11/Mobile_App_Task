@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app_task/business_logic/navigation_bar_BL/navigation_bar_bloc.dart';
 import 'package:mobile_app_task/constants.dart';
-import 'package:mobile_app_task/screens/widgets/social_icons.dart';
+import 'package:mobile_app_task/screens/home_screen/widgets/social_icons.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontStyle: FontStyle.italic),
                 textAlign: TextAlign.center,
               ),
-              SocialIcons(iconSize: MediaQuery.of(context).size.width * 0.1),
+              const SocialIcons(),
             ],
           ),
         );

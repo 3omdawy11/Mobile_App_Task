@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app_task/business_logic/navigation_bar_BL/navigation_bar_bloc.dart';
-import 'package:mobile_app_task/screens/home_screen.dart';
+import 'package:mobile_app_task/constants.dart';
+import 'package:mobile_app_task/screens/home_screen/home_screen.dart';
 import 'package:mobile_app_task/screens/post_screen.dart';
-import 'package:mobile_app_task/screens/users_screen.dart';
+import 'package:mobile_app_task/screens/user_screen/users_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -18,22 +19,10 @@ class MainScreen extends StatelessWidget {
             fixedColor: Colors.blue,
             currentIndex: state.tabIndex,
             onTap: (index) {
-              BlocProvider.of<NavigationBarBloc>(context).add(TabChange(tabIndex: index));
+              BlocProvider.of<NavigationBarBloc>(context)
+                  .add(TabChange(tabIndex: index));
             },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Users',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.feed),
-                label: 'Posts',
-              ),
-            ],
+            items: navigationBarItems
           ),
         );
       },
