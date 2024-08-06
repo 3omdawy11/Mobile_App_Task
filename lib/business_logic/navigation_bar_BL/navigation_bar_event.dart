@@ -4,6 +4,6 @@ part of 'navigation_bar_bloc.dart';
 abstract class NavigationBarEvent {}
 
 class TabChange extends NavigationBarEvent {
-  int tabIndex;
+  final int tabIndex;
   TabChange({required this.tabIndex});
 }

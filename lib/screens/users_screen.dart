@@ -6,8 +6,9 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-            Text('Your are now in the users screen')
+            Center(child: Text('Your are now in the users screen'))
         ],
       ),
     );

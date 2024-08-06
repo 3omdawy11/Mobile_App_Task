@@ -6,8 +6,9 @@ class PostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Your are now in the post screen'),
+          Center(child: Text('Your are now in the post screen')),
         ],
       ),
     );
