@@ -4,18 +4,20 @@ import '../../../constants.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo({
-    super.key,
+    super.key, required this.name, required this.email, required this.address,
   });
-
+  final String name;
+  final String email;
+  final String address;
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InfoLine(question: 'Name', answer: 'Mohamed Emad',),
-        InfoLine(question: 'Email', answer: 'mohamedzaky@email.com'),
-        InfoLine(question: 'Address', answer: 'Cairo, Egypt'),
+        InfoLine(question: 'Name', answer: name,),
+        InfoLine(question: 'Email', answer: email),
+        InfoLine(question: 'Address', answer: address),
       ],
     );
   }

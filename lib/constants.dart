@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -27,6 +28,13 @@ const TextStyle profileTextStyle = TextStyle(
   fontSize: 16,
   overflow: TextOverflow.ellipsis,
 );
+
+const TextStyle appBarTextStyle = TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.bold,
+  color: Colors.blue
+);
+
 const double profileIconSize = 65;
 
 
@@ -39,3 +47,24 @@ final List<Map<String, dynamic>> socialIconData = [
   {'path': '', 'icon': const Icon(Icons.web, size: contactIconSize, color: Colors.orange)},
   {'path': '', 'icon': const Icon(Icons.phone, size: contactIconSize, color: Colors.green)},
 ];
+
+const double postButtonsSize = 30;
+
+const List<Widget> postButtons = [
+  Icon(CupertinoIcons.heart, size: postButtonsSize,),
+  SizedBox(width: 10,),
+  Icon(CupertinoIcons.conversation_bubble, size: postButtonsSize,),
+  SizedBox(width: 10,),
+  Icon(CupertinoIcons.check_mark_circled, size: postButtonsSize,)
+];
+
+const TextStyle postBodyTextStyle  =  TextStyle(
+  fontSize: 18,
+  overflow: TextOverflow.ellipsis,
+);
+
+const TextStyle postTitleTextStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+  overflow: TextOverflow.ellipsis,
+);

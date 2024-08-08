@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_task/screens/user_screen/widgets/user_info.dart';
-import 'package:mobile_app_task/screens/user_screen/widgets/profile_icon.dart';
+import 'package:mobile_app_task/screens/widgets/profile_icon.dart';
+
+import '../../constants.dart';
+import '../widgets/customized_app_bar.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({super.key});
@@ -8,11 +11,14 @@ class UserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return const UserPost();
-            }));
+      appBar: buildAppBar('Users'),
+      body: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return const UserPost();
+        },
+      ),
+    );
   }
 }
 
@@ -33,8 +39,15 @@ class UserPost extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ProfileIcon(),
-              UserInfo()
+              ProfileIcon(
+                username: 'username',
+                vertical: true,
+              ),
+              const UserInfo(
+                name: 'Mohamed Emad',
+                email: 'mohamedzaky970@gmail.com',
+                address: 'Cairo, Egypt',
+              )
             ],
           ),
         ),
@@ -42,7 +55,3 @@ class UserPost extends StatelessWidget {
     );
   }
 }
-
-
-
-

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app_task/business_logic/navigation_bar_BL/navigation_bar_bloc.dart';
 import 'package:mobile_app_task/constants.dart';
 import 'package:mobile_app_task/screens/home_screen/home_screen.dart';
-import 'package:mobile_app_task/screens/post_screen.dart';
+import 'package:mobile_app_task/screens/post_screen/post_screen.dart';
 import 'package:mobile_app_task/screens/user_screen/users_screen.dart';
 
 class MainScreen extends StatelessWidget {
