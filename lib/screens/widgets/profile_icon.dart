@@ -10,36 +10,33 @@ class ProfileIcon extends StatelessWidget {
   final bool vertical;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: vertical
-          ? Column(
-              children: [
-                const Icon(
-                  CupertinoIcons.profile_circled,
-                  size: profileIconSize,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(username,
-                style: const TextStyle(
-                  overflow: TextOverflow.ellipsis
-                ),)
-              ],
-            )
-          : Row(
-              children: [
-                const Icon(
-                  CupertinoIcons.profile_circled,
-                  size: profileIconSize,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(username)
-              ],
-            ),
-    );
+    return vertical
+        ? Column(
+            children: [
+              const Icon(
+                CupertinoIcons.profile_circled,
+                size: profileIconSize,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(username,
+              style: const TextStyle(
+                overflow: TextOverflow.ellipsis
+              ),)
+            ],
+          )
+        : Row(
+            children: [
+              const Icon(
+                CupertinoIcons.profile_circled,
+                size: profileIconSize,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(username)
+            ],
+          );
   }
 }

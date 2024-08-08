@@ -5,6 +5,7 @@ import 'package:mobile_app_task/constants.dart';
 import 'package:mobile_app_task/screens/post_screen/data/post_model/post_model.dart';
 import 'package:mobile_app_task/screens/post_screen/manager/post_bloc.dart';
 import 'package:mobile_app_task/screens/post_screen/widgets/post_title_and_description.dart';
+import 'package:mobile_app_task/screens/user_screen/manager/user_bloc.dart';
 import 'package:mobile_app_task/screens/widgets/customized_app_bar.dart';
 
 import '../widgets/profile_icon.dart';
@@ -17,27 +18,42 @@ class PostScreen extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar('Posts'),
       body: BlocBuilder<PostBloc, PostState>(
-        builder: (context, state) {
-          if (state is PostLoadingState) {
+        builder: (context, postState) {
+          if (postState is PostLoadingState) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is PostLoadedState) {
-            List<PostModel> posts = state.posts;
+          } else if (postState is PostLoadedState) {
+            List<PostModel> posts = postState.posts;
             return ListView.builder(
               itemCount: posts.length,
               itemBuilder: (context, index) {
-                return Post(
-                  profilePic: const Icon(CupertinoIcons.profile_circled),
-                  username: 'Mohamed',
-                  title: posts[index].title ?? 'No Post',
-                  body: posts[index].body ?? 'No Body',
+                return BlocBuilder<UserBloc, UserState>(
+                  builder: (context, userState) {
+                    if (userState is UserLoadedState) {
+                      final user = userState.users.firstWhere(
+                        (user) => user.id == posts[index].userId,
+                      );
+
+                      return Post(
+                        profilePic: const Icon(CupertinoIcons.profile_circled),
+                        username: user.username ?? "Unknown",
+                        title: posts[index].title ?? 'No Post',
+                        body: posts[index].body ?? 'No Body',
+                      );
+                    } else if (userState is UserLoadingState) {
+                      return const CircularProgressIndicator();
+                    } else if (userState is UserErrorState) {
+                      return const Text('User Error');
+                    }
+                    return Container();
+                  },
                 );
               },
             );
-          } else if (state is PostErrorState) {
+          } else if (postState is PostErrorState) {
             return const Center(
-              child: Text('Error'),
+              child: Text('Error loading posts'),
             );
           }
           return Container();

@@ -40,34 +40,9 @@ class MainScreen extends StatelessWidget {
       case 0:
         return const HomeScreen();
       case 1:
-        return BlocProvider(
-          create: (BuildContext context) {
-            final bloc = UserBloc(
-              UserRemoteDataSourceImp(
-                apiService: ApiService(
-                  Dio(),
-                ),
-              ),
-            );
-            bloc.add(
-                LoadUserEvent()); // Add this line to trigger loading the users
-            return bloc;
-          },
-          child: const UserScreen(),
-        );
+        return const UserScreen();
       case 2:
-        return BlocProvider(
-            create: (BuildContext context) {
-              final bloc = PostBloc(
-                PostRemoteDataSourceImp(
-                  apiService: ApiService(Dio(),
-                  ),
-                ),
-              );
-              bloc.add(LoadPostEvent());
-              return bloc;
-            },
-            child: const PostScreen());
+        return const PostScreen();
       default:
         return const HomeScreen();
     }
