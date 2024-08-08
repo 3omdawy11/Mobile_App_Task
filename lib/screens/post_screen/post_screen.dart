@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_app_task/constants.dart';
+import 'package:mobile_app_task/screens/post_screen/data/post_model/post_model.dart';
+import 'package:mobile_app_task/screens/post_screen/manager/post_bloc.dart';
 import 'package:mobile_app_task/screens/post_screen/widgets/post_title_and_description.dart';
 import 'package:mobile_app_task/screens/widgets/customized_app_bar.dart';
 
@@ -12,33 +15,52 @@ class PostScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar('Posts'),
-        body: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return Post(
-                profilePic: const Icon(CupertinoIcons.profile_circled),
-                username: 'Mohamed',
-                title:
-                    'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-                body:
-                    'quia et suscipit suscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto');
-          },
-        ));
+      appBar: buildAppBar('Posts'),
+      body: BlocBuilder<PostBloc, PostState>(
+        builder: (context, state) {
+          if (state is PostLoadingState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is PostLoadedState) {
+            List<PostModel> posts = state.posts;
+            return ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                return Post(
+                  profilePic: const Icon(CupertinoIcons.profile_circled),
+                  username: 'Mohamed',
+                  title: posts[index].title ?? 'No Post',
+                  body: posts[index].body ?? 'No Body',
+                );
+              },
+            );
+          } else if (state is PostErrorState) {
+            return const Center(
+              child: Text('Error'),
+            );
+          }
+          return Container();
+        },
+      ),
+    );
   }
 }
 
 class Post extends StatelessWidget {
-  Post(
-      {super.key,
-      required this.profilePic,
-      required this.username,
-      required this.title,
-      required this.body});
-  Icon profilePic;
-  String username;
-  String title;
-  String body;
+  const Post({
+    super.key,
+    required this.profilePic,
+    required this.username,
+    required this.title,
+    required this.body,
+  });
+
+  final Icon profilePic;
+  final String username;
+  final String title;
+  final String body;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -66,7 +88,7 @@ class Post extends StatelessWidget {
                   const Spacer(),
                   const Icon(
                     Icons.more_horiz,
-                  )
+                  ),
                 ],
               ),
               PostTitleAndDescription(
@@ -77,7 +99,7 @@ class Post extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Row(children: postButtons),
-              )
+              ),
             ],
           ),
         ),

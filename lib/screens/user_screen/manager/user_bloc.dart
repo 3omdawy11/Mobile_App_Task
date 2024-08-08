@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:mobile_app_task/screens/user_screen/data/user_model/UserModel.dart';
 
-import '../data/remote_data_source.dart';
+import '../data/remote_user_data.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
