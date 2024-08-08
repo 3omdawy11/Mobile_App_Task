@@ -22,7 +22,10 @@ class ProfileIcon extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(username)
+                Text(username,
+                style: const TextStyle(
+                  overflow: TextOverflow.ellipsis
+                ),)
               ],
             )
           : Row(

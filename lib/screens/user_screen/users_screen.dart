@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_app_task/screens/user_screen/data/user_model/UserModel.dart';
+import 'package:mobile_app_task/screens/user_screen/manager/user_bloc.dart';
 import 'package:mobile_app_task/screens/user_screen/widgets/user_info.dart';
 import 'package:mobile_app_task/screens/widgets/profile_icon.dart';
 
@@ -12,10 +15,34 @@ class UserScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar('Users'),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return const UserPost();
+      body: BlocBuilder<UserBloc, UserState>(
+        builder: (context, state) {
+          if (state is UserLoadingState) {
+            print('Iam in the userloadingstate');
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is UserErrorState) {
+            return const Center(
+              child: Text('Error'),
+            );
+          }
+          if (state is UserLoadedState) {
+            List<UserModel> users = state.users;
+            return ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (context, index) {
+                return UserPost(
+                  username: users[index].username ?? 'Unknown Username',
+                  name: users[index].name ?? 'Unknown Name',
+                  email: users[index].email ?? 'Unknown Email',
+                  address: users[index].address?.street ?? 'Unknown Address',
+                );
+              },
+            );
+          }
+          return Container();
         },
       ),
     );
@@ -23,7 +50,18 @@ class UserScreen extends StatelessWidget {
 }
 
 class UserPost extends StatelessWidget {
-  const UserPost({super.key});
+  const UserPost({
+    super.key,
+    required this.username,
+    required this.name,
+    required this.email,
+    required this.address,
+  });
+
+  final String username;
+  final String name;
+  final String email;
+  final String address;
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +70,23 @@ class UserPost extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(18))),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.0),
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(24)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ProfileIcon(
-                username: 'username',
+                username: username,
                 vertical: true,
               ),
-              const UserInfo(
-                name: 'Mohamed Emad',
-                email: 'mohamedzaky970@gmail.com',
-                address: 'Cairo, Egypt',
-              )
+              UserInfo(
+                name: name,
+                email: email,
+                address: address,
+              ),
             ],
           ),
         ),

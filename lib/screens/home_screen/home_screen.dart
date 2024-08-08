@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_app_task/business_logic/navigation_bar_BL/navigation_bar_bloc.dart';
 import 'package:mobile_app_task/constants.dart';
 import 'package:mobile_app_task/screens/home_screen/widgets/social_icons.dart';
+
+import 'manager/navigation_bar_BL/navigation_bar_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

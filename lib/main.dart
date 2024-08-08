@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_task/app_router.dart';
-import 'package:mobile_app_task/business_logic/navigation_bar_BL/navigation_bar_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_app_task/screens/home_screen/manager/navigation_bar_BL/navigation_bar_bloc.dart';
 import 'package:mobile_app_task/screens/main_screen.dart';
 
 void main() {
