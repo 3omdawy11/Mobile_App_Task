@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile_app_task/screens/user_posts_screen.dart';
+import 'package:mobile_app_task/screens/user_screen/user_posts_screen.dart';
 import 'package:mobile_app_task/screens/user_screen/data/user_model/UserModel.dart';
 import 'package:mobile_app_task/screens/user_screen/manager/user_bloc.dart';
 import 'package:mobile_app_task/screens/post_screen/manager/post_bloc.dart';
